@@ -136,3 +136,4 @@ D:\HAXKDwork\EarnVidhi\EarnVidhiCore\obj\Debug\net8.0\EarnVidhiCore.genruntimeco
 D:\HAXKDwork\EarnVidhi\EarnVidhiCore\obj\Debug\net8.0\ref\EarnVidhiCore.dll
 D:\HAXKDwork\EarnVidhi\EarnVidhiCore\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\HAXKDwork\EarnVidhi\EarnVidhiCore\bin\Debug\net8.0\EarnVidhiCore.staticwebassets.runtime.json
+D:\HAXKDwork\EarnVidhi\EarnVidhiCore\obj\Debug\net8.0\EarnVidhiCore.sourcelink.json

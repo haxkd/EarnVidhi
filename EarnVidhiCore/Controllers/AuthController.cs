@@ -42,7 +42,7 @@ namespace EarnVidhiCore.Controllers
                     errors.Add("Name field is Required");
                 }
 
-                if (string.IsNullOrWhiteSpace(user.UserMobile) )
+                if (string.IsNullOrWhiteSpace(user.UserMobile))
                 {
                     errors.Add("Mobile Field is Required");
                 }
@@ -62,7 +62,7 @@ namespace EarnVidhiCore.Controllers
                 }
 
                 var CheckUser = await _context.Users.FirstOrDefaultAsync(x => x.UserEmail == user.UserEmail || x.UserMobile == user.UserMobile);
-                if (CheckUser!=null)
+                if (CheckUser != null)
                 {
                     errors.Add("user already exist with same email..!");
                 }
@@ -81,7 +81,7 @@ namespace EarnVidhiCore.Controllers
 
                 var verifyLink = "";
 
-                bool isSent = new MailLogic(_configuration, _httpContextAccessor).SendOtpMail(user.UserEmail,verifyLink);
+                new MailLogic(_configuration, _httpContextAccessor).SendOtpMail(user.UserEmail, verifyLink);
 
                 response.status = 1;
                 response.msg = "User Register Successfully now verify Your email!";
@@ -104,10 +104,23 @@ namespace EarnVidhiCore.Controllers
             dynamic response = new ExpandoObject();
             if (loguser.UserEmail != null && loguser.UserPassword != null)
             {
+
                 var user = await _context.Users.FirstOrDefaultAsync(x => x.UserEmail == loguser.UserEmail || x.UserPassword == loguser.UserPassword);
 
                 if (user != null)
                 {
+
+
+
+                    var verifyCode = GenerateCode();
+                    var verify = new EmailVerify() { UserId = user.UserId, VerifyCode = verifyCode };
+                    await _context.EmailVerify.AddAsync(verify);
+                    await _context.SaveChangesAsync();
+
+                    new MailLogic(_configuration, _httpContextAccessor).SendOtpMail(verifyCode, user.UserEmail);
+
+
+
                     if (user.UserStatus == "block")
                     {
                         response.status = 0;
@@ -156,6 +169,15 @@ namespace EarnVidhiCore.Controllers
                 response.msg = "Invalid credentials";
                 return Ok(response);
             }
+        }
+
+        [NonAction]
+        public string GenerateCode()
+        {
+            Random random = new Random();
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            string otp = new string(new char[20].Select(_ => chars[random.Next(chars.Length)]).ToArray());
+            return otp;
         }
     }
 }
