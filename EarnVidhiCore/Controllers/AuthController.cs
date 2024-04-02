@@ -14,14 +14,16 @@ using static System.Net.WebRequestMethods;
 
 namespace EarnVidhiCore.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
     {
+    
         public IConfiguration _configuration;
         public readonly ApplicationDbContext _context;
-
         private readonly IHttpContextAccessor _httpContextAccessor;
+        
         public AuthController(IConfiguration config, ApplicationDbContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
