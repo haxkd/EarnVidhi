@@ -15,6 +15,9 @@ public partial class User
     [StringLength(50)]
     [Unicode(false)]
     public string? UserName { get; set; }
+    [StringLength(50)]
+    [Unicode(false)]
+    public string? UserPromo { get; set; }
 
     [StringLength(10)]
     public string? UserMobile { get; set; }

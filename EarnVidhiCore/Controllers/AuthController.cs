@@ -76,14 +76,16 @@ namespace EarnVidhiCore.Controllers
                     response.error = errors;
                     return Ok(response);
                 }
-
+                user.UserRegistered = DateTime.Now;
                 await _context.Users.AddAsync(user);
                 await _context.SaveChangesAsync();
                 //send mail
 
-                var verifyLink = "";
-
-                new MailLogic(_configuration, _httpContextAccessor).SendOtpMail(user.UserEmail, verifyLink);
+                var verifyCode = GenerateCode();
+                var verify = new EmailVerify() { UserId = user.UserId, VerifyCode = verifyCode,VerifyDate=DateTime.Now };
+                await _context.EmailVerify.AddAsync(verify);
+                await _context.SaveChangesAsync();
+                new MailLogic(_configuration, _httpContextAccessor).SendOtpMail(verifyCode, user.UserEmail);
 
                 response.status = 1;
                 response.msg = "User Register Successfully now verify Your email!";
@@ -111,16 +113,6 @@ namespace EarnVidhiCore.Controllers
 
                 if (user != null)
                 {
-
-
-
-                    var verifyCode = GenerateCode();
-                    var verify = new EmailVerify() { UserId = user.UserId, VerifyCode = verifyCode };
-                    await _context.EmailVerify.AddAsync(verify);
-                    await _context.SaveChangesAsync();
-
-                    new MailLogic(_configuration, _httpContextAccessor).SendOtpMail(verifyCode, user.UserEmail);
-
 
 
                     if (user.UserStatus == "block")
@@ -173,6 +165,46 @@ namespace EarnVidhiCore.Controllers
             }
         }
 
+
+        [HttpGet("verify/{token}")]
+        public async Task<IActionResult> Verify(string token)
+        {
+            dynamic response = new ExpandoObject();
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                response.status = 0;
+                response.msg = "Invalid Token";
+                return Ok(response);
+            }
+
+            var verifyToken = await _context.EmailVerify.FirstOrDefaultAsync(x=>x.VerifyCode==token);
+            if (verifyToken == null)
+            {
+                response.status = 0;
+                response.msg = "Invalid Token";
+                return Ok(response);
+            }
+
+            var user = await _context.Users.FirstOrDefaultAsync(x=>x.UserId==verifyToken.UserId);
+
+            var username = "EV"+GenerateCode().ToUpper().Substring(0,5) + user.UserId;
+
+            user.UserPromo = username;
+            user.UserEmailVerify = 1;
+            user.UserStatus = "1";
+
+            await _context.SaveChangesAsync();
+
+            _context.EmailVerify.Remove(verifyToken);
+            await _context.SaveChangesAsync();
+
+
+            response.status = 1;
+            response.msg = "Email Verified";
+            return Ok(response);
+        }
+
+
         [NonAction]
         public string GenerateCode()
         {
@@ -181,5 +213,6 @@ namespace EarnVidhiCore.Controllers
             string otp = new string(new char[20].Select(_ => chars[random.Next(chars.Length)]).ToArray());
             return otp;
         }
+    
     }
 }
