@@ -14,7 +14,6 @@ using static System.Net.WebRequestMethods;
 
 namespace EarnVidhiCore.Controllers
 {
-
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
