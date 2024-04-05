@@ -18,7 +18,6 @@ namespace EarnVidhiCore.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-    
         public IConfiguration _configuration;
         public readonly ApplicationDbContext _context;
         private readonly IHttpContextAccessor _httpContextAccessor;
