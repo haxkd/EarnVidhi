@@ -21,7 +21,7 @@ namespace EarnVidhiCore.Controllers
         public IConfiguration _configuration;
         public readonly ApplicationDbContext _context;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        
+
         public AuthController(IConfiguration config, ApplicationDbContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
@@ -80,7 +80,7 @@ namespace EarnVidhiCore.Controllers
                 //send mail
 
                 var verifyCode = GenerateCode();
-                var verify = new EmailVerify() { UserId = user.UserId, VerifyCode = verifyCode,VerifyDate=DateTime.Now };
+                var verify = new EmailVerify() { UserId = user.UserId, VerifyCode = verifyCode, VerifyDate = DateTime.Now };
                 await _context.EmailVerify.AddAsync(verify);
                 await _context.SaveChangesAsync();
                 new MailLogic(_configuration, _httpContextAccessor).SendOtpMail(verifyCode, user.UserEmail);
@@ -175,7 +175,7 @@ namespace EarnVidhiCore.Controllers
                 return Ok(response);
             }
 
-            var verifyToken = await _context.EmailVerify.FirstOrDefaultAsync(x=>x.VerifyCode==token);
+            var verifyToken = await _context.EmailVerify.FirstOrDefaultAsync(x => x.VerifyCode == token);
             if (verifyToken == null)
             {
                 response.status = 0;
@@ -183,9 +183,9 @@ namespace EarnVidhiCore.Controllers
                 return Ok(response);
             }
 
-            var user = await _context.Users.FirstOrDefaultAsync(x=>x.UserId==verifyToken.UserId);
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.UserId == verifyToken.UserId);
 
-            var username = "EV"+GenerateCode().ToUpper().Substring(0,5) + user.UserId;
+            var username = "EV" + GenerateCode().ToUpper().Substring(0, 5) + user.UserId;
 
             user.UserPromo = username;
             user.UserEmailVerify = 1;
@@ -203,6 +203,55 @@ namespace EarnVidhiCore.Controllers
         }
 
 
+        [HttpGet("resendverify")]
+        public async Task<IActionResult> ResendVerify(string email)
+        {
+            dynamic response = new ExpandoObject();
+            if (string.IsNullOrWhiteSpace(email))
+            {
+                response.status = 0;
+                response.msg = "Invalid Email";
+                return Ok(response);
+            }
+
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.UserEmail == email);
+            if (user == null)
+            {
+                response.status = 0;
+                response.msg = "Invalid Email";
+                return Ok(response);
+            }
+            if (user.UserEmailVerify == 1)
+            {
+                response.status = 0;
+                response.msg = "Invalid Already Verified";
+                return Ok(response);
+            }
+
+
+            var token = await _context.EmailVerify.FirstOrDefaultAsync(x => x.UserId == user.UserId);
+            string VerifyCode = "";
+            if (token != null)
+            {
+                VerifyCode = token.VerifyCode;
+            }
+            else
+            {
+                VerifyCode = GenerateCode();
+
+                var verify = new EmailVerify() { UserId = user.UserId, VerifyCode = VerifyCode, VerifyDate = DateTime.Now };
+                await _context.EmailVerify.AddAsync(verify);
+                await _context.SaveChangesAsync();
+            }
+            new MailLogic(_configuration, _httpContextAccessor).SendOtpMail(VerifyCode, user.UserEmail);
+
+            response.status = 1;
+            response.msg = "Verification link sent successfully!";
+
+
+            return Ok(email);
+        }
+
         [NonAction]
         public string GenerateCode()
         {
@@ -211,6 +260,6 @@ namespace EarnVidhiCore.Controllers
             string otp = new string(new char[20].Select(_ => chars[random.Next(chars.Length)]).ToArray());
             return otp;
         }
-    
+
     }
 }
