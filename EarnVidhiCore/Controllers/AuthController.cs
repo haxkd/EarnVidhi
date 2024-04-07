@@ -21,7 +21,6 @@ namespace EarnVidhiCore.Controllers
         public IConfiguration _configuration;
         public readonly ApplicationDbContext _context;
         private readonly IHttpContextAccessor _httpContextAccessor;
-
         public AuthController(IConfiguration config, ApplicationDbContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
