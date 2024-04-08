@@ -1,16 +1,11 @@
-﻿using Azure;
-using EarnVidhiCore.Models;
-using Microsoft.AspNetCore.Http;
+﻿using EarnVidhiCore.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.Dynamic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using static System.Net.WebRequestMethods;
 
 namespace EarnVidhiCore.Controllers
 {

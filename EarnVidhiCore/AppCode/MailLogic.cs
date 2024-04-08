@@ -1,5 +1,8 @@
 ﻿using System.Net.Mail;
 using System.Net;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 public class MailLogic
 {

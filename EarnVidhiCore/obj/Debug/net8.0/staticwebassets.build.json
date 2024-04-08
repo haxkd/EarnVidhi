@@ -1,0 +1,39 @@
+{
+  "Version": 1,
+  "Hash": "UGLcWz+U+L+i877zyYVCR8HBwXezgg1r6Ww9cMuPSSs=",
+  "Source": "EarnVidhiCore",
+  "BasePath": "_content/EarnVidhiCore",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "EarnVidhiCore\\wwwroot",
+      "Source": "EarnVidhiCore",
+      "ContentRoot": "D:\\HAXKDwork\\EarnVidhi\\EarnVidhiCore\\wwwroot\\",
+      "BasePath": "_content/EarnVidhiCore",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "D:\\HAXKDwork\\EarnVidhi\\EarnVidhiCore\\wwwroot\\MailTemplates\\VerifyEmail.html",
+      "SourceId": "EarnVidhiCore",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\HAXKDwork\\EarnVidhi\\EarnVidhiCore\\wwwroot\\",
+      "BasePath": "_content/EarnVidhiCore",
+      "RelativePath": "MailTemplates/VerifyEmail.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\MailTemplates\\VerifyEmail.html"
+    }
+  ]
+}
