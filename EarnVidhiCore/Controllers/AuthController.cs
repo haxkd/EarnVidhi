@@ -1,4 +1,5 @@
 ﻿using EarnVidhiCore.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -94,6 +95,7 @@ namespace EarnVidhiCore.Controllers
         }
 
 
+
         [HttpPost("login")]
         public async Task<IActionResult> Login(User loguser)
         {
@@ -105,7 +107,6 @@ namespace EarnVidhiCore.Controllers
 
                 if (user != null)
                 {
-
 
                     if (user.UserStatus == "block")
                     {
@@ -120,26 +121,31 @@ namespace EarnVidhiCore.Controllers
                         return Ok(response);
                     }
                     //create claims details based on the user information
-                    var claims = new[] {
-                        new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
-                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                        new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
-                        new Claim("UserId", user.UserId.ToString()),
-                        new Claim("UserName", user.UserName),
-                        new Claim("UserEmail", user.UserEmail)
-                    };
 
-                    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
-                    var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+                    var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+                    var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+                    var claims = new[]
+                    {
+                new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim("UserId", user.UserId.ToString())
+            };
+
                     var token = new JwtSecurityToken(
-                        _configuration["Jwt:Issuer"],
-                        _configuration["Jwt:Audience"],
-                        claims,
-                        expires: DateTime.UtcNow.AddMinutes(10),
-                        signingCredentials: signIn);
+                        issuer: _configuration["Jwt:Issuer"],
+                        audience: _configuration["Jwt:Audience"],
+                        claims: claims,
+                        expires: DateTime.UtcNow.AddHours(1),
+                        signingCredentials: credentials
+                    );
+
+
+                    var gtoken = new JwtSecurityTokenHandler().WriteToken(token);
+
                     response.status = 1;
                     response.msg = "success";
-                    response.token = new JwtSecurityTokenHandler().WriteToken(token);
+                    response.token = gtoken;
                     return Ok(response);
                 }
                 else
@@ -156,6 +162,7 @@ namespace EarnVidhiCore.Controllers
                 return Ok(response);
             }
         }
+
 
 
         [HttpGet("verify/{token}")]

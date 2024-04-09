@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EarnVidhiCore")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f5a91e7db1f8ad6c830aed865a8ba3e51d50d930")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4c7baa364becaf5dbb6601ef7d9baab80b6e8ec6")]
 [assembly: System.Reflection.AssemblyProductAttribute("EarnVidhiCore")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EarnVidhiCore")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
