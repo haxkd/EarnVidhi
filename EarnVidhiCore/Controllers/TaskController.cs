@@ -31,19 +31,31 @@ namespace EarnVidhiCore.Controllers
         [Authorize]
         public async Task<IActionResult> Dashboard()
         {
+            dynamic response = new ExpandoObject();
             int uid = Convert.ToInt32(_httpcontext.HttpContext.User.Claims
                        .First(i => i.Type == "UserId").Value);
 
             var user = await _context.Users.FirstOrDefaultAsync(x => x.UserId == uid);
 
-            dynamic response = new ExpandoObject();
+
+            var todayCompletedTasks = await _context.TaskHistories
+            .Where(th => th.UserId == uid && th.CreatedAt.Value.Date == DateTime.Today)
+            .ToListAsync();
+            decimal walletAmount = user.MainWallet ?? 0;
+            var data = new
+            {
+                User = user,
+                TodayCompletedTasks = todayCompletedTasks.Count,
+                WalletAmount = walletAmount
+            };
+
             response.status = 1;
             response.msg = "success";
-            response.data.data = user;
+            response.data = data;
 
             return Ok(response);
         }
 
-        
+
     }
 }
