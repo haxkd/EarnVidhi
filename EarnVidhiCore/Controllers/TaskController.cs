@@ -9,7 +9,6 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-
 namespace EarnVidhiCore.Controllers
 {
     [Route("api/[controller]")]
