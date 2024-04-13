@@ -25,7 +25,6 @@ namespace EarnVidhiCore.Controllers
             _context = context;
         }
 
-
         [HttpGet("dashboard")]
         [Authorize]
         public async Task<IActionResult> Dashboard()
