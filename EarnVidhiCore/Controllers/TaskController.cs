@@ -15,6 +15,7 @@ namespace EarnVidhiCore.Controllers
     [ApiController]
     public class TaskController : ControllerBase
     {
+    
         public IConfiguration _configuration;
         readonly IHttpContextAccessor _httpcontext;
         public readonly ApplicationDbContext _context;
