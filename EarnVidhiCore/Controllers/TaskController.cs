@@ -35,7 +35,6 @@ namespace EarnVidhiCore.Controllers
 
             var user = await _context.Users.FirstOrDefaultAsync(x => x.UserId == uid);
 
-
             var todayCompletedTasks = await _context.TaskHistories
             .Where(th => th.UserId == uid && th.CreatedAt.Value.Date == DateTime.Today)
             .ToListAsync();
