@@ -33,7 +33,6 @@ namespace EarnVidhiCore.Controllers
             int uid = Convert.ToInt32(_httpcontext.HttpContext.User.Claims
                        .First(i => i.Type == "UserId").Value);
             var user = await _context.Users.FirstOrDefaultAsync(x => x.UserId == uid);
-
             var todayCompletedTasks = await _context.TaskHistories
             .Where(th => th.UserId == uid && th.CreatedAt.Value.Date == DateTime.Today)
             .ToListAsync();
