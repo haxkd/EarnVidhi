@@ -43,7 +43,6 @@ namespace EarnVidhiCore.Controllers
                 TodayCompletedTasks = todayCompletedTasks.Count,
                 WalletAmount = walletAmount
             };
-
             response.status = 1;
             response.msg = "success";
             response.data = data;
