@@ -46,7 +46,6 @@ namespace EarnVidhiCore.Controllers
             response.status = 1;
             response.msg = "success";
             response.data = data;
-
             return Ok(response);
         }
 
