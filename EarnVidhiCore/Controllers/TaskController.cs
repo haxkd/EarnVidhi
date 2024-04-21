@@ -49,6 +49,5 @@ namespace EarnVidhiCore.Controllers
             return Ok(response);
         }
 
-
     }
 }
