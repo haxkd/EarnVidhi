@@ -48,6 +48,5 @@ namespace EarnVidhiCore.Controllers
             response.data = data;
             return Ok(response);
         }
-
     }
 }
