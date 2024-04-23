@@ -14,6 +14,7 @@ public partial class TaskHistory
 
     public int? UserId { get; set; }
 
+    public string? TaskToken { get; set; }
     public int? TaskId { get; set; }
 
     [Column("status")]

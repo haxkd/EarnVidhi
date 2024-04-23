@@ -17,7 +17,7 @@ public partial class ApplicationDbContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
     public virtual DbSet<EmailVerify> EmailVerify { get; set; }
-    public virtual DbSet<Task> Tasks { get; set; }
+    public virtual DbSet<MyTask> Tasks { get; set; }
 
     public virtual DbSet<TaskHistory> TaskHistories { get; set; }
 

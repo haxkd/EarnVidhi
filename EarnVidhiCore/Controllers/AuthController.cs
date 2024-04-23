@@ -128,9 +128,9 @@ namespace EarnVidhiCore.Controllers
 
                     var claims = new[]
                     {
+                new Claim("UserId", user.UserId.ToString()),
                 new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim("UserId", user.UserId.ToString())
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
                     var token = new JwtSecurityToken(

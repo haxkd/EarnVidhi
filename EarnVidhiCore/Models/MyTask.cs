@@ -6,7 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EarnVidhiCore.Models;
 
-public partial class Task
+[Table("Tasks")]
+public partial class MyTask
 {
     [Key]
     public int TaskId { get; set; }
