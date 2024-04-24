@@ -72,7 +72,6 @@ namespace EarnVidhiCore.Controllers
                     .Select(s => s[random.Next(s.Length)]).ToArray());
                 token = UId + token;
                 List<TasksDto> tasks = new List<TasksDto>();
-
                 var todayTaskLogs = await _context.TaskHistories.Where(log => log.CreatedAt.HasValue && log.CreatedAt.Value.Date == DateTime.Today && log.UserId == UId && log.Status==1).ToListAsync();
 
                 int i = 1;
