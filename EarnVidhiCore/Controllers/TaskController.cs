@@ -65,7 +65,6 @@ namespace EarnVidhiCore.Controllers
                     response.msg = "Not Allowed for Tasks";
                     return Ok(response);
                 }
-
                 Random random = new Random();
                 const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
                 string token = new string(Enumerable.Repeat(chars, 20)
