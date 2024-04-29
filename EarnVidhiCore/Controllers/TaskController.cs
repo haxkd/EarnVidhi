@@ -84,7 +84,6 @@ namespace EarnVidhiCore.Controllers
                 List<TasksDto> tasks = new List<TasksDto>();
                 var todayTaskLogs = await _context.TaskHistories.Where(log => log.CreatedAt.HasValue && log.CreatedAt.Value.Date == DateTime.Today && log.UserId == UId && log.Status == 1).ToListAsync();
                 int i = 1;
-
                 foreach (TaskHistory log in todayTaskLogs)
                 {
                     TasksDto model = new TasksDto()
