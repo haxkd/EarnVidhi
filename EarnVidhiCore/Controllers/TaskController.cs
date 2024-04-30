@@ -96,7 +96,6 @@ namespace EarnVidhiCore.Controllers
                     i++;
                     tasks.Add(model);
                 }
-
                 var prevTask = await _context.TaskHistories.FirstOrDefaultAsync(log => log.CreatedAt.HasValue && log.CreatedAt.Value.Date == DateTime.Today && log.UserId == UId && log.Status == 0);
                 var taskRecord = await _context.Tasks.OrderBy(r => Guid.NewGuid()).FirstOrDefaultAsync(x => x.TaskStatus == 1);
 
