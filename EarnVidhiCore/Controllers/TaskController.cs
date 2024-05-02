@@ -110,7 +110,6 @@ namespace EarnVidhiCore.Controllers
                             Url = $"{theTask.TaskUrl}?&token={token}&User={user.UserPromo}",
                             IsCompleted = "Start"
                         });
-
                         prevTask.TaskToken = token;
                         await _context.SaveChangesAsync();
                     }
