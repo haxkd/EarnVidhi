@@ -127,7 +127,6 @@ namespace EarnVidhiCore.Controllers
                         await _context.SaveChangesAsync();
                     }
                 }
-
                 for (int x = i; x <= 9; x++)
                 {
                     TasksDto model = new TasksDto();
