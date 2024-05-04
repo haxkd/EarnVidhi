@@ -136,7 +136,6 @@ namespace EarnVidhiCore.Controllers
                     model.IsCompleted = "Pending";
                     tasks.Add(model);
                 }
-
                 response.status = 1;
                 response.msg = "success";
                 response.data = tasks;
