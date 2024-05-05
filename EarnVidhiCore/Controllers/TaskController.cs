@@ -140,7 +140,6 @@ namespace EarnVidhiCore.Controllers
                 response.msg = "success";
                 response.data = tasks;
                 return Ok(response);
-
             }
             catch (Exception ex)
             {
