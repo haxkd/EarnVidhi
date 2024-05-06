@@ -148,7 +148,6 @@ namespace EarnVidhiCore.Controllers
                 response.error = ex;
                 return Ok(response);
             }
-
         }
 
         [HttpGet("successTasks")]
