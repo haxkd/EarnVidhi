@@ -1,5 +1,4 @@
-﻿
-using Azure;
+﻿using Azure;
 using EarnVidhiCore.Dtos;
 using EarnVidhiCore.Models;
 using Microsoft.AspNetCore.Authorization;
