@@ -35,8 +35,7 @@ namespace EarnVidhiCore.Controllers
             dynamic response = new ExpandoObject();
             try
             {
-                int uid = Convert.ToInt32(_httpcontext.HttpContext.User.Claims
-                           .First(i => i.Type == "UserId").Value);
+                int uid = Convert.ToInt32(_httpcontext.HttpContext.User.Claims.First(i => i.Type == "UserId").Value);
                 var user = await _context.Users.FirstOrDefaultAsync(x => x.UserId == uid);
                 var todayCompletedTasks = await _context.TaskHistories.Where(th => th.UserId == uid && th.CreatedAt.Value.Date == DateTime.Today && th.Status==1).ToListAsync();
                 decimal walletAmount = user.MainWallet ?? 0;
