@@ -59,6 +59,7 @@ namespace EarnVidhiCore.Controllers
             }
         }
 
+
         [HttpGet("allTasks")]
         [Authorize]
         public async Task<IActionResult> AllTasks()
