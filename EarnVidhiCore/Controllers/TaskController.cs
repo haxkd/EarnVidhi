@@ -60,6 +60,7 @@ namespace EarnVidhiCore.Controllers
             }
         }
 
+        //Retrieve all tasks for a user
         [HttpGet("allTasks")]
         [Authorize]
         public async Task<IActionResult> AllTasks()
