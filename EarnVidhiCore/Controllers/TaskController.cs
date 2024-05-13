@@ -150,6 +150,7 @@ namespace EarnVidhiCore.Controllers
             }
         }
 
+        //to success a task
         [HttpGet("successTasks")]
         public async Task<IActionResult> SuccessTasks(string? token, string? userPromo)
         {
