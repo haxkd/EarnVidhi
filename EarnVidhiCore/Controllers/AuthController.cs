@@ -10,7 +10,6 @@ using System.Text;
 
 namespace EarnVidhiCore.Controllers
 {
-
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
