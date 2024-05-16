@@ -39,7 +39,6 @@ namespace EarnVidhiCore.Controllers
                 {
                     errors.Add("Mobile Field is Required");
                 }
-
                 if (string.IsNullOrWhiteSpace(user.UserEmail))
                 {
                     errors.Add("Email Field is Required");
