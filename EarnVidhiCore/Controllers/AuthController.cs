@@ -69,7 +69,6 @@ namespace EarnVidhiCore.Controllers
                 user.UserRegistered = DateTime.Now;
                 await _context.Users.AddAsync(user);
                 await _context.SaveChangesAsync();
-
                 var verifyCode = GenerateCode();
                 var verify = new EmailVerify() { UserId = user.UserId, VerifyCode = verifyCode, VerifyDate = DateTime.Now };
                 await _context.EmailVerify.AddAsync(verify);
