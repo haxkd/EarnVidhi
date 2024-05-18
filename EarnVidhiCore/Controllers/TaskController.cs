@@ -166,13 +166,25 @@ namespace EarnVidhiCore.Controllers
                 {
                     return BadRequest();
                 }
-                TaskHistory? tblTask = await _context.TaskHistories.FirstOrDefaultAsync(x => x.TaskToken == token.ToString() && x.UserId == user.UserId);
+                TaskHistory? tblTask = await _context.TaskHistories.FirstOrDefaultAsync(x => x.TaskToken == token.ToString() && x.UserId == user.UserId && x.Status==0);
                 if (tblTask == null)
                 {
                     return BadRequest();
                 }
                 tblTask.Status = 1;
                 await _context.SaveChangesAsync();
+
+                // if todays 9 tasks completed distribute the amount
+                var todayTaskLogs = await _context.TaskHistories.Where(log => log.CreatedAt.HasValue && log.CreatedAt.Value.Date == DateTime.Today && log.UserId == user.UserId && log.Status == 1).ToListAsync();
+
+                if (todayTaskLogs.Count == 9)
+                {
+                    user.MainWallet += 10;
+                    await _context.SaveChangesAsync();
+                }
+
+
+
                 response.status = 1;
                 response.msg = "success";
                 return Ok(response);
