@@ -47,7 +47,6 @@ namespace EarnVidhiCore.Controllers
                 {
                     errors.Add("Invalid Email Format");
                 }
-
                 if (string.IsNullOrWhiteSpace(user.UserPassword))
                 {
                     errors.Add("Password Field is Required");
