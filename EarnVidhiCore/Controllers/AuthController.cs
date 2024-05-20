@@ -51,7 +51,6 @@ namespace EarnVidhiCore.Controllers
                 {
                     errors.Add("Password Field is Required");
                 }
-
                 var CheckUser = await _context.Users.FirstOrDefaultAsync(x => x.UserEmail == user.UserEmail || x.UserMobile == user.UserMobile);
                 if (CheckUser != null)
                 {
