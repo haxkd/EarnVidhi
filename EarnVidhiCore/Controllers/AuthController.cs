@@ -56,7 +56,6 @@ namespace EarnVidhiCore.Controllers
                 {
                     errors.Add("user already exist with same email..!");
                 }
-
                 if (errors.Count > 0)
                 {
                     response.status = 0;
