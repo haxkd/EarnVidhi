@@ -71,7 +71,6 @@ namespace EarnVidhiCore.Controllers
                 await _context.EmailVerify.AddAsync(verify);
                 await _context.SaveChangesAsync();
                 new MailLogic(_configuration, _httpContextAccessor).SendOtpMail(verifyCode, user.UserEmail);
-
                 response.status = 1;
                 response.msg = "User Register Successfully now verify Your email!";
                 response.data = user;
