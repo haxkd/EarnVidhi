@@ -110,7 +110,6 @@ namespace EarnVidhiCore.Controllers
                             response.msg = "Please verify Your email!";
                             return Ok(response);
                         }
-
                         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
                         var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
