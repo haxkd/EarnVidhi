@@ -118,7 +118,6 @@ namespace EarnVidhiCore.Controllers
                 new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
-
                         var token = new JwtSecurityToken(
                             issuer: _configuration["Jwt:Issuer"],
                             audience: _configuration["Jwt:Audience"],
