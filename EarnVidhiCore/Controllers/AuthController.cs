@@ -110,7 +110,6 @@ namespace EarnVidhiCore.Controllers
                         }
                         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
                         var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
                         var claims = new[]
                         {
                             new Claim("UserId", user.UserId.ToString()),
