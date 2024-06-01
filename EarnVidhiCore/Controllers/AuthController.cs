@@ -194,7 +194,6 @@ namespace EarnVidhiCore.Controllers
             }
         }
 
-
         [HttpGet("resendverify")]
         public async Task<IActionResult> ResendVerify(string email)
         {
