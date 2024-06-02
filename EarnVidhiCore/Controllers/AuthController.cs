@@ -219,7 +219,6 @@ namespace EarnVidhiCore.Controllers
                     response.msg = "Invalid Already Verified";
                     return Ok(response);
                 }
-
                 var token = await _context.EmailVerify.FirstOrDefaultAsync(x => x.UserId == user.UserId);
                 string VerifyCode = "";
                 if (token != null)
