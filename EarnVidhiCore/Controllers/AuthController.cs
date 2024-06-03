@@ -255,6 +255,5 @@ namespace EarnVidhiCore.Controllers
             string otp = new string(new char[20].Select(_ => chars[random.Next(chars.Length)]).ToArray());
             return otp;
         }
-
     }
 }
