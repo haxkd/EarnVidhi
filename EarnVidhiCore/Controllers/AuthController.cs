@@ -124,7 +124,6 @@ namespace EarnVidhiCore.Controllers
                             signingCredentials: credentials
                         );
                         var gtoken = new JwtSecurityTokenHandler().WriteToken(token);
-
                         response.status = 1;
                         response.msg = "success";
                         response.token = gtoken;
