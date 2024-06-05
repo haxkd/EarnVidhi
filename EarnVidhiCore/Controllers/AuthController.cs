@@ -171,7 +171,6 @@ namespace EarnVidhiCore.Controllers
                     response.msg = "Invalid Token";
                     return Ok(response);
                 }
-
                 var user = await _context.Users.FirstOrDefaultAsync(x => x.UserId == verifyToken.UserId);
                 var username = "EV" + GenerateCode().ToUpper().Substring(0, 5) + user.UserId;
                 user.UserPromo = username;
