@@ -86,6 +86,7 @@ namespace EarnVidhiCore.Controllers
             }
         }
 
+        //to user login
         [HttpPost("login")]
         public async Task<IActionResult> Login(User loguser)
         {
