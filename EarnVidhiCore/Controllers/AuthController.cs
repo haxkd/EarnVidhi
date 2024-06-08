@@ -154,6 +154,7 @@ namespace EarnVidhiCore.Controllers
             }
         }
 
+        // to verify user
         [HttpGet("verify/{token}")]
         public async Task<IActionResult> Verify(string token)
         {
