@@ -183,7 +183,6 @@ namespace EarnVidhiCore.Controllers
                 }
 
 
-
                 response.status = 1;
                 response.msg = "success";
                 return Ok(response);
