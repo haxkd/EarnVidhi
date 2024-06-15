@@ -182,7 +182,6 @@ namespace EarnVidhiCore.Controllers
                     await _context.SaveChangesAsync();
                 }
 
-
                 response.status = 1;
                 response.msg = "success";
                 return Ok(response);
