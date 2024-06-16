@@ -181,7 +181,6 @@ namespace EarnVidhiCore.Controllers
                     user.MainWallet += 10;
                     await _context.SaveChangesAsync();
                 }
-
                 response.status = 1;
                 response.msg = "success";
                 return Ok(response);
