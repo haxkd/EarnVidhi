@@ -1,0 +1,104 @@
+
+CREATE DATABASE [db_earnvidhi]
+
+
+USE [db_earnvidhi]
+GO
+
+
+CREATE TABLE [dbo].[EmailVerify](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[UserId] [int] NULL,
+	[VerifyCode] [varchar](50) NULL,
+	[VerifyDate] [datetime] NULL,
+ CONSTRAINT [PK_EmailVerify] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[TaskHistory]    Script Date: 6/18/2024 2:40:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TaskHistory](
+	[HistoryId] [int] IDENTITY(1,1) NOT NULL,
+	[UserId] [int] NULL,
+	[TaskId] [int] NULL,
+	[TaskToken] [nvarchar](max) NULL,
+	[status] [int] NULL,
+	[created_at] [datetime] NULL,
+ CONSTRAINT [PK_TaskHistory] PRIMARY KEY CLUSTERED 
+(
+	[HistoryId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Tasks]    Script Date: 6/18/2024 2:40:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Tasks](
+	[TaskId] [int] IDENTITY(1,1) NOT NULL,
+	[TaskUrl] [varchar](max) NULL,
+	[TaskStatus] [int] NULL,
+ CONSTRAINT [PK_Tasks] PRIMARY KEY CLUSTERED 
+(
+	[TaskId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[User]    Script Date: 6/18/2024 2:40:17 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[User](
+	[UserId] [int] IDENTITY(1,1) NOT NULL,
+	[UserName] [varchar](50) NULL,
+	[UserPromo] [varchar](50) NULL,
+	[UserMobile] [nchar](10) NULL,
+	[UserEmail] [varchar](50) NULL,
+	[UserPassword] [varchar](50) NULL,
+	[UserStatus] [varchar](50) NULL,
+	[UserSponsor] [int] NULL,
+	[UserRegistered] [datetime] NULL,
+	[UserEmailVerify] [int] NULL,
+	[MainWallet] [decimal](18, 4) NULL,
+ CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED 
+(
+	[UserId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[EmailVerify] ADD  CONSTRAINT [DF_EmailVerify_VerifyDate]  DEFAULT (getdate()) FOR [VerifyDate]
+GO
+ALTER TABLE [dbo].[TaskHistory] ADD  CONSTRAINT [DF_TaskHistory_status]  DEFAULT ((0)) FOR [status]
+GO
+ALTER TABLE [dbo].[TaskHistory] ADD  CONSTRAINT [DF_TaskHistory_created_at]  DEFAULT (getdate()) FOR [created_at]
+GO
+ALTER TABLE [dbo].[Tasks] ADD  CONSTRAINT [DF_Table_1_status]  DEFAULT ((0)) FOR [TaskStatus]
+GO
+ALTER TABLE [dbo].[User] ADD  CONSTRAINT [DF_User_UserStatus]  DEFAULT ((0)) FOR [UserStatus]
+GO
+ALTER TABLE [dbo].[User] ADD  CONSTRAINT [DF_User_UserSponsor]  DEFAULT ((0)) FOR [UserSponsor]
+GO
+ALTER TABLE [dbo].[User] ADD  CONSTRAINT [DF_User_UserRegistered]  DEFAULT (getdate()) FOR [UserRegistered]
+GO
+ALTER TABLE [dbo].[User] ADD  CONSTRAINT [DF_User_UserEmailVerify]  DEFAULT ((0)) FOR [UserEmailVerify]
+GO
+ALTER TABLE [dbo].[User] ADD  CONSTRAINT [DF_User_MainWallet]  DEFAULT ((0)) FOR [MainWallet]
+GO
+ALTER TABLE [dbo].[EmailVerify]  WITH CHECK ADD  CONSTRAINT [FK_EmailVerify_User] FOREIGN KEY([UserId])
+REFERENCES [dbo].[User] ([UserId])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[EmailVerify] CHECK CONSTRAINT [FK_EmailVerify_User]
+GO
+USE [master]
+GO
+ALTER DATABASE [db_earnvidhi] SET  READ_WRITE 
+GO
