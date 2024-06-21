@@ -174,7 +174,6 @@ namespace EarnVidhiCore.Controllers
                 tblTask.Status = 1;
                 await _context.SaveChangesAsync();
                 var todayTaskLogs = await _context.TaskHistories.Where(log => log.CreatedAt.HasValue && log.CreatedAt.Value.Date == DateTime.Today && log.UserId == user.UserId && log.Status == 1).ToListAsync();
-
                 if (todayTaskLogs.Count == 9)
                 {
                     user.MainWallet += 10;
