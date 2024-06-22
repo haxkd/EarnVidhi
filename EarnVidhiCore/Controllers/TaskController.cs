@@ -192,6 +192,7 @@ namespace EarnVidhiCore.Controllers
             }
         }
 
+
         [NonAction]
         public int getuserid()
         {
