@@ -78,8 +78,7 @@ namespace EarnVidhiCore.Controllers
                 }
                 Random random = new Random();
                 const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-                string token = new string(Enumerable.Repeat(chars, 20)
-                    .Select(s => s[random.Next(s.Length)]).ToArray());
+                string token = new string(Enumerable.Repeat(chars, 20).Select(s => s[random.Next(s.Length)]).ToArray());
                 token = UId + token;
                 List<TasksDto> tasks = new List<TasksDto>();
                 var todayTaskLogs = await _context.TaskHistories.Where(log => log.CreatedAt.HasValue && log.CreatedAt.Value.Date == DateTime.Today && log.UserId == UId && log.Status == 1).ToListAsync();
