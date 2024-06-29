@@ -14,6 +14,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace EarnVidhiCore.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class TaskController : ControllerBase
