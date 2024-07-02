@@ -86,6 +86,7 @@ namespace EarnVidhiCore.Controllers
                 return Ok(response);
             }
         }
+        
 
         //to user login
         [HttpPost("login")]
