@@ -252,6 +252,7 @@ namespace EarnVidhiCore.Controllers
             }
         }
 
+
         [NonAction]
         public string GenerateCode()
         {
