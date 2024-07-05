@@ -24,7 +24,6 @@ namespace EarnVidhiCore.Controllers
             _httpContextAccessor = httpContextAccessor;
         }
 
-
         //to signup of a user
         [HttpPost("signup/")]
         public async Task<ActionResult<User>> SignUp(User user)
