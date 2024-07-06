@@ -84,8 +84,7 @@ namespace EarnVidhiCore.Controllers
                 response.error = ex;
                 return Ok(response);
             }
-        }
-        
+        }        
 
         //to user login
         [HttpPost("login")]
