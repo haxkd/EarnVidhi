@@ -153,7 +153,6 @@ namespace EarnVidhiCore.Controllers
                 return Ok(response);
             }
         }
-        
 
         // to verify user
         [HttpGet("verify/{token}")]
