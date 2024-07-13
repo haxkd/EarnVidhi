@@ -250,7 +250,6 @@ namespace EarnVidhiCore.Controllers
             }
         }
 
-
         // to generate random string
         [NonAction]
         public string GenerateCode()
