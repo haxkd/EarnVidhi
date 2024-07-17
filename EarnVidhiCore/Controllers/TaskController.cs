@@ -191,6 +191,7 @@ namespace EarnVidhiCore.Controllers
             }
         }
 
+        //returns userid of logged in user
         [NonAction]
         public int getuserid()
         {
