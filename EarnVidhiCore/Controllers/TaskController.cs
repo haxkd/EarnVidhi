@@ -27,6 +27,7 @@ namespace EarnVidhiCore.Controllers
             _httpcontext = httpcontext;
             _context = context;
         }
+
         
         //to get users basic data
         [HttpGet("dashboard")]
