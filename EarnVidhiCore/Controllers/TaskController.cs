@@ -28,7 +28,7 @@ namespace EarnVidhiCore.Controllers
             _context = context;
         }
 
-        
+
         //to get users basic data
         [HttpGet("dashboard")]
         [Authorize]
